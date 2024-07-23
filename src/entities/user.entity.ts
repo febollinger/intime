@@ -18,10 +18,11 @@ export class User{
     @Column({type:"date"})
     birthday!:string;
 
-    @Column({type:"timestamp"})
-    created_at!:string
+    @Column({type:"timestamp", default: () => 'CURRENT_TIMESTAMP'})
+    created_at!:Date;
 
-    @OneToMany(() => Task,(task) => task.user)
-    task!: Task[]
+    @OneToMany(() => Task, (task) => task.user)
+    task!
+    : Task[];
     
 }
