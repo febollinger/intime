@@ -22,8 +22,16 @@ export const readUserService = async () => {
 
 }
 
-export const getOneUserService = async (body: string) => {
-
+export const getOneUserService = async (userId: number) => {
+    const userRepository: Repository<User> = AppDataSource.getRepository(User)
+    console.log(userRepository)
+    const findUserById = userRepository.findOne({
+        where:{
+            id: userId
+        }
+    })
+    console.log(findUserById)
+    return findUserById
 }
 
 export const editUserService = async (body: string) => {
