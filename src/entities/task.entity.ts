@@ -15,7 +15,7 @@ export class Task{
     @Column({type:"varchar", length:60})
     title!:string;
     
-    @Column({type:"varchar", unique:true})
+    @Column({type:"varchar"})
     description!: string;
 
     @Column({
