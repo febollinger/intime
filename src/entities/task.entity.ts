@@ -15,7 +15,7 @@ export class Task{
     @Column({type:"varchar", length:60})
     title!:string;
     
-    @Column({type:"varchar", unique:true})
+    @Column({type:"varchar"})
     description!: string;
 
     @Column({
@@ -25,8 +25,8 @@ export class Task{
     })
     Progress!: TaskProgress[]
 
-    @Column({type:"timestamp"})
-    created_at!:string
+    @Column({type:"timestamp", default: () => 'CURRENT_TIMESTAMP'})
+    created_at!:Date;
 
     @DeleteDateColumn()
     deletedDate!: Date;

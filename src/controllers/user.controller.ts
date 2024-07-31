@@ -38,6 +38,6 @@ export const deleteUserController = async (request: Request, response: Response)
     const userId: number = Number(request.params.id);
     const userResp = await deleteUserService(userId)
 
-    return response.status(204).json(userResp)
+    return response.status(204)
 
 }
