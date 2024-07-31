@@ -24,17 +24,24 @@ export const readUserService = async () => {
 
 export const getOneUserService = async (userId: number) => {
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
-    console.log(userRepository)
+
     const findUserById = userRepository.findOne({
         where:{
             id: userId
         }
     })
-    console.log(findUserById)
+ 
     return findUserById
 }
 
-export const editUserService = async (body: string) => {
+export const editUserService = async (userId: number, userBody: string) => {
+    const userRepository = await AppDataSource.createQueryBuilder()
+    .update(User)
+    .set(userBody)
+    .where("id = :id",{id: userId})
+    .execute()
+
+    return userRepository
 
 }
 
