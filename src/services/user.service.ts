@@ -22,14 +22,31 @@ export const readUserService = async () => {
 
 }
 
-export const getOneUserService = async (body: string) => {
+export const getOneUserService = async (userId: number) => {
+    const userRepository: Repository<User> = AppDataSource.getRepository(User)
+
+    const findUserById = userRepository.findOne({
+        where:{
+            id: userId
+        }
+    })
+ 
+    return findUserById
+}
+
+export const editUserService = async (userId: number, userBody: string) => {
+    const userRepository = await AppDataSource.createQueryBuilder()
+    .update(User)
+    .set(userBody)
+    .where("id = :id",{id: userId})
+    .execute()
+
+    return userRepository
 
 }
 
-export const editUserService = async (body: string) => {
+export const deleteUserService = async (userId: number) => {
+    const userRepository = await AppDataSource.getRepository(User).createQueryBuilder().softDelete().where("id = :id", {id: userId}).execute()
 
-}
-
-export const deleteUserService = async (body: string) => {
-
+    return userRepository
 }
