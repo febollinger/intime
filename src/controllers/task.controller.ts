@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { createTaskService } from "../services/task.service"
+import { createTaskService, getTasksService } from "../services/task.service"
 
 export const createTaskController =async (request: Request, response: Response) => {
     const taskBody = request.body
@@ -7,4 +7,10 @@ export const createTaskController =async (request: Request, response: Response) 
 
     return response.status(201).json(taskResp)
 
+}
+
+export const getTasksController = async (request: Request, response: Response) => {
+    const getTasks = await getTasksService()
+
+    return response.status(200).json(getTasks)
 }

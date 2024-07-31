@@ -11,3 +11,10 @@ export const createTaskService = async (taskBody: any) => {
 
     return await taskRepository.save(creatingTask)
 }
+
+export const getTasksService = async () => {
+    const taskRepository: Repository<Task> = AppDataSource.getRepository(Task)
+    const gettingTask = await taskRepository.find()
+
+    return gettingTask
+}
