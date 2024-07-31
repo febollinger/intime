@@ -25,8 +25,8 @@ export class Task{
     })
     Progress!: TaskProgress[]
 
-    @Column({type:"timestamp"})
-    created_at!:string
+    @Column({type:"timestamp", default: () => 'CURRENT_TIMESTAMP'})
+    created_at!:Date;
 
     @DeleteDateColumn()
     deletedDate!: Date;
