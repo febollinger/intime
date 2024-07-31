@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Task } from "./task.entity";
 
 @Entity("users")
@@ -20,6 +20,9 @@ export class User{
 
     @Column({type:"timestamp", default: () => 'CURRENT_TIMESTAMP'})
     created_at!:Date;
+
+    @DeleteDateColumn()
+    deletedDate!: Date;
 
     @OneToMany(() => Task, (task) => task.user)
     task!

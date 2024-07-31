@@ -45,6 +45,8 @@ export const editUserService = async (userId: number, userBody: string) => {
 
 }
 
-export const deleteUserService = async (body: string) => {
+export const deleteUserService = async (userId: number) => {
+    const userRepository = await AppDataSource.getRepository(User).createQueryBuilder().softDelete().where("id = :id", {id: userId}).execute()
 
+    return userRepository
 }

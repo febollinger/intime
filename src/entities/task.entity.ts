@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user.entity";
 
 export enum TaskProgress {
@@ -27,6 +27,9 @@ export class Task{
 
     @Column({type:"timestamp"})
     created_at!:string
+
+    @DeleteDateColumn()
+    deletedDate!: Date;
 
     @ManyToOne(() => User, (user) => user.task)
     user!: User
