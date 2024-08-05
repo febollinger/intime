@@ -1,4 +1,6 @@
-import { Column, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeSoftRemove, BeforeUpdate, Column, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { getRounds, hashSync } from "bcrypt";
+
 import { Task } from "./task.entity";
 
 @Entity("users")
@@ -15,6 +17,7 @@ export class User{
     @Column({type:"varchar"})
     password!: string;
 
+
     @Column({type:"date"})
     birthday!:string;
 
@@ -27,5 +30,15 @@ export class User{
     @OneToMany(() => Task, (task) => task.user)
     task!
     : Task[];
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    @BeforeSoftRemove()
+    hashPassword(){
+        const hashedPass = getRounds(this.password)
+        if(!hashedPass){
+            this.password = hashSync(this.password, 10)
+        }
+    }
     
 }
