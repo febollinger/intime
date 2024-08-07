@@ -25,7 +25,7 @@ export const editTaskService = async (taskId: number, taskBody: string) => {
     .set(taskBody)
     .where("id = :id", {id: taskId})
     .execute()
-    console.log(taskRepository)
+    
     return taskRepository
 }
 
