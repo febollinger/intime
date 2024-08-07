@@ -13,7 +13,6 @@ export const loginService = async (userLogin: UserLoginInterface) => {
     .createQueryBuilder("user")
     .where("user.email = :email", { email: userLogin.email })
     .getOne()
-    console.log(getUser)
 
     if(!getUser){
         throw new Error("User not found or wrong password.");
