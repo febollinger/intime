@@ -11,7 +11,9 @@ export const createUserService = async (body: DeepPartial<User>) => {
 
     const user = await userRepository.save(creatingUser)
 
-    return user
+    const { password, ...sanitizedUser } = user;
+
+    return sanitizedUser
 }
 
 export const readUserService = async () => {

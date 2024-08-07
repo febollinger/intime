@@ -1,5 +1,5 @@
 import { BeforeInsert, BeforeSoftRemove, BeforeUpdate, Column, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { getRounds, hashSync } from "bcrypt";
+import bcrypt, {getRounds}  from "bcrypt";
 
 import { Task } from "./task.entity";
 
@@ -33,12 +33,10 @@ export class User{
 
     @BeforeInsert()
     @BeforeUpdate()
-    @BeforeSoftRemove()
-    hashPassword(){
-        const hashedPass = getRounds(this.password)
-        if(!hashedPass){
-            this.password = hashSync(this.password, 10)
-        }
+    async hashPassword(){
+        const salt = await bcrypt.genSalt()
+        this.password = await bcrypt.hash(this.password, salt)
+
     }
     
 }
