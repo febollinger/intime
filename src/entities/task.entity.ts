@@ -1,4 +1,4 @@
-import { Column, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user.entity";
 
 export enum TaskProgress {
@@ -12,10 +12,10 @@ export class Task{
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({type:"varchar", length:60})
+    @Column({type:"varchar", length:50})
     title!:string;
     
-    @Column({type:"varchar"})
+    @Column({type:"varchar", length:150})
     description!: string;
 
     @Column({
@@ -23,15 +23,15 @@ export class Task{
         enum: TaskProgress,
         default: TaskProgress.NOTSTARTED,
     })
-    Progress!: TaskProgress[]
+    Progress!: TaskProgress
 
-    @Column({type:"timestamp", default: () => 'CURRENT_TIMESTAMP'})
+    @CreateDateColumn()
     created_at!:Date;
 
     @DeleteDateColumn()
     deletedDate!: Date;
 
-    @ManyToOne(() => User, (user) => user.task)
+    @ManyToOne(() => User, (user) => user.tasks)
     user!: User
 
 }
