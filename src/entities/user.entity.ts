@@ -1,35 +1,34 @@
-import { BeforeInsert, BeforeSoftRemove, BeforeUpdate, Column, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import bcrypt, {getRounds}  from "bcrypt";
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import bcrypt from "bcrypt";
 
 import { Task } from "./task.entity";
 
 @Entity("users")
 export class User{
     @PrimaryGeneratedColumn()
-    id!: number;
+    id!: number
 
-    @Column({type:"varchar", length:60})
-    name!:string;
+    @Column({ type: "varchar", length: 50 })
+    name!: string
     
     @Column({type:"varchar", unique:true})
-    email!: string;
+    email!: string
 
     @Column({type:"varchar"})
-    password!: string;
+    password!: string
 
 
     @Column({type:"date"})
-    birthday!:string;
+    birthday_date!:string
 
-    @Column({type:"timestamp", default: () => 'CURRENT_TIMESTAMP'})
-    created_at!:Date;
+    @CreateDateColumn({name: "created_at"})
+    created_at!:Date
 
     @DeleteDateColumn()
-    deletedDate!: Date;
+    deleted_at!: Date
 
     @OneToMany(() => Task, (task) => task.user)
-    task!
-    : Task[];
+    tasks!: Task[]
 
     @BeforeInsert()
     @BeforeUpdate()
