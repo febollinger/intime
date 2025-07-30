@@ -17,7 +17,21 @@ $ yarn install
 ou
 $ pnpm install
 ```
+<h2>⚙️ <strong>Rodando o projeto</strong></h2>
 
+<p>Após a instalação de todas as dependências, configure a porta no arquivo de variáveis de ambiente.</p>
+<p>Inicie o projeto com: </p>
 
+```bash
+$ npm run start
+```
+<h2> <strong>Bibliotecas utilizadas</strong></h2>
+
+-Bcrypt
+-Dotenv
+-Express
+-Typeorm
+-Jsonwebtoken
+-Swagger
 
 
